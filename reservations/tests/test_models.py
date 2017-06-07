@@ -83,3 +83,15 @@ class ReservationTestCase(TestCase):
                 room_number=1,
                 creator=UserFactory(),
             )
+
+    def test_model_delete_should_change_deleted_field(self):
+        reservation = ReservationFactory()
+        reservation.delete()
+        reservation = Reservation.all_objects.get(id=reservation.id)
+        self.assertTrue(reservation.deleted)
+
+    def test_deleted_model_should_not_appear_in_query(self):
+        reservation = ReservationFactory(deleted=True)
+        self.assertIsNone(
+            Reservation.objects.filter(id=reservation.id).first()
+        )
