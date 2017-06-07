@@ -7,8 +7,8 @@ class Reservation(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     room_number = models.IntegerField(db_index=True)
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateField(db_index=True)
+    end_date = models.DateField(db_index=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -31,8 +31,3 @@ class Reservation(models.Model):
         )
         if is_overlaps:
             raise ValidationError('Room is already booked for this dates')
-
-    class Meta:
-        index_together = (
-            ('start_date', 'end_date'),
-        )
