@@ -18,7 +18,7 @@ class ReservationApiDeleteTestCase(APITestCase):
         response = self.client.delete('/api/v1/reservations/777/')
         self.assertEqual(response.status_code, 404)
 
-    def test_should_return_403_if_try_to_delete_non_own_reservation(self):
+    def test_should_return_403_if_try_to_delete_not_own_reservation(self):
         user = UserFactory()
         self.client.login(username=user.username, password=TEST_PASSWORD)
         reservation = ReservationFactory()

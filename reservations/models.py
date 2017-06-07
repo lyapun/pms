@@ -27,6 +27,14 @@ class Reservation(models.Model):
     objects = ReservationManager()
     all_objects = models.Manager()
 
+    def __str__(self):
+        return '{first_name} {last_name} - {start_date} - {end_date}'.format(
+            first_name=self.first_name,
+            last_name=self.last_name,
+            start_date=self.start_date,
+            end_date=self.end_date,
+        )
+
     def save(self, *args, **kwargs):
         self.clean()
         return super(Reservation, self).save(*args, **kwargs)
