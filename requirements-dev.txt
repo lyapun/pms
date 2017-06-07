@@ -1,0 +1,4 @@
+-r requirements.txt
+
+factory_boy==2.8.1
+django-test-without-migrations==0.6
