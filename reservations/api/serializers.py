@@ -4,6 +4,11 @@ from reservations.models import Reservation
 
 
 class ReservationSerializer(serializers.ModelSerializer):
+    creator = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         model = Reservation
         fields = ('id', 'start_date', 'end_date', 'room_number', 'creator',

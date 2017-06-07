@@ -1,11 +1,11 @@
 from datetime import date, timedelta
 
-from django.test import TestCase
+from rest_framework.test import APITestCase
 
 from ..factories import ReservationFactory, UserFactory, TEST_PASSWORD
 
 
-class ReservationApiGetListTestCase(TestCase):
+class ReservationApiGetListTestCase(APITestCase):
     def test_should_return_403_for_non_authenticated_user(self):
         response = self.client.get('/api/v1/reservations/')
         self.assertEqual(response.status_code, 403)
@@ -52,7 +52,7 @@ class ReservationApiGetListTestCase(TestCase):
         self.assertEqual(data['results'][0]['id'], current_res.id)
 
 
-class ReservationApiGetDetailsTestCase(TestCase):
+class ReservationApiGetDetailsTestCase(APITestCase):
     def test_should_return_403_for_non_authenticated_user(self):
         response = self.client.get('/api/v1/reservations/1/')
         self.assertEqual(response.status_code, 403)
